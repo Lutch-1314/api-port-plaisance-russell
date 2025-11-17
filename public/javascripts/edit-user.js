@@ -18,20 +18,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const usernameCell = row.children[0];
     const emailCell = row.children[1];
 
-    // Afficher le formulaire
     editBtn.addEventListener('click', () => {
       form.classList.remove('hidden');
       editBtn.classList.add('hidden');
     });
 
-    // Annuler
     cancelBtn?.addEventListener('click', () => {
       form.classList.add('hidden');
       editBtn.classList.remove('hidden');
       form.reset();
     });
 
-    // Validation mot de passe
     function validatePassword(password, confirmPassword) {
       if (!password && !confirmPassword) return null; // pas de mot de passe, pas de validation
       const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
@@ -50,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const password = form.querySelector('[name="password"]').value;
       const confirmPassword = form.querySelector('[name="confirmPassword"]').value;
 
-      // Validation
       const validationError = validatePassword(password, confirmPassword);
       if (validationError) {
         showMessage(validationError, 'error');

@@ -2,8 +2,8 @@ const jwt = require("jsonwebtoken");
 const SECRET_KEY = process.env.SECRET_KEY;
 
 function checkJWT(req, res, next) {
-  const token = req.cookies.token; // récupéré du cookie
-  if (!token) return res.redirect("/home"); // pas connecté → retour accueil
+  const token = req.cookies.token;
+  if (!token) return res.redirect("/home");
 
   try {
     const decoded = jwt.verify(token, SECRET_KEY);
@@ -20,4 +20,4 @@ function checkJWT(req, res, next) {
   }
 }
 
-module.exports = checkJWT;  // ✅ export direct
+module.exports = checkJWT;

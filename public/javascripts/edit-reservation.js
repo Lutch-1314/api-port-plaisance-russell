@@ -1,5 +1,3 @@
-// edit-reservation.js — uniquement Modifier / Annuler / PUT + repositionnement
-
 function showMessage(message, type = 'success') {
   const msgDiv = document.querySelector('.message');
   if (!msgDiv) return;
@@ -68,7 +66,6 @@ export function setupEditableReservations(tableSelector = '.editable-table.reser
     const form = editRow.querySelector('.update-form');
     const cancelBtn = form?.querySelector('.cancel-btn');
 
-    // CLIQUE SUR MODIFIER
     editBtn.addEventListener('click', e => {
       e.stopPropagation();
       row.style.display = 'none';
@@ -76,7 +73,6 @@ export function setupEditableReservations(tableSelector = '.editable-table.reser
       if (deleteBtn) deleteBtn.classList.add('hidden');
     });
 
-    // CLIQUE SUR ANNULER
     if (cancelBtn) {
       cancelBtn.addEventListener('click', e => {
         e.stopPropagation();
@@ -86,7 +82,6 @@ export function setupEditableReservations(tableSelector = '.editable-table.reser
       });
     }
 
-    // ENVOI DU FORMULAIRE (PUT)
     if (form) {
       form.addEventListener('submit', async e => {
         e.preventDefault();
@@ -141,7 +136,6 @@ export function setupEditableReservations(tableSelector = '.editable-table.reser
   });
 }
 
-// Initialisation
 document.addEventListener('DOMContentLoaded', () => {
   setupEditableReservations();
 });

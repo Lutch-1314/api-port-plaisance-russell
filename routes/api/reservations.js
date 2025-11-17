@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true }); // important pour récupérer :id depuis /catways/:id
-const private = require('../../middlewares/checkJWT');
+const authApi = require('../../middlewares/authAPI');
 const reservationController = require('../../controllers/reservationController');
+
+router.use(authApi);
 
 /**
  * @swagger
@@ -202,10 +204,10 @@ const reservationController = require('../../controllers/reservationController')
  */
 
 // 🔹 Routes API REST (avec auth privée)
-router.get('/', private, reservationController.getAllReservations);
-router.post('/', private, reservationController.addReservation);
-router.get('/:idReservation', private, reservationController.getReservationById);
-router.put('/:idReservation', private, reservationController.updateReservation);
-router.delete('/:idReservation', private, reservationController.deleteReservation);
+router.get('/', authApi, reservationController.getAllReservations);
+router.post('/', authApi, reservationController.addReservation);
+router.get('/:idReservation', authApi, reservationController.getReservationById);
+router.put('/:idReservation', authApi, reservationController.updateReservation);
+router.delete('/:idReservation', authApi, reservationController.deleteReservation);
 
 module.exports = router;

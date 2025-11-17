@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const private = require('../../middlewares/checkJWT');
+const authApi = require('../../middlewares/authAPI');
 const userController = require('../../controllers/userController');
+
+router.use(authApi);
 
 /**
  * @swagger
@@ -140,8 +142,8 @@ router.get('/logout', userController.logout);
  *       400:
  *         description: Données invalides ou email déjà utilisé
  */
-router.get('/', private, userController.getAllUsers);
-router.post('/', private, userController.addUser);
+router.get('/', authApi, userController.getAllUsers);
+router.post('/', authApi, userController.addUser);
 
 /**
  * @swagger
@@ -213,8 +215,8 @@ router.post('/', private, userController.addUser);
  *       404:
  *         description: Utilisateur non trouvé
  */
-router.get('/:email', private, userController.getUserByEmail);
-router.put('/:email', private, userController.updateUser);
-router.delete('/:email', private, userController.deleteUser);
+router.get('/:email', authApi, userController.getUserByEmail);
+router.put('/:email', authApi, userController.updateUser);
+router.delete('/:email', authApi, userController.deleteUser);
 
 module.exports = router;

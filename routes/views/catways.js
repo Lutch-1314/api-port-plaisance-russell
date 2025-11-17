@@ -1,4 +1,3 @@
-// routes/views/catways.js
 const express = require('express');
 const router = express.Router();
 const private = require('../../middlewares/checkJWT');

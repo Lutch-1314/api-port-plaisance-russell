@@ -1,13 +1,9 @@
-// services/userService.js
 const User = require('../models/user');
-const bcrypt = require('bcrypt');
 
-// Récupère tous les utilisateurs, sans le mot de passe
 exports.getAllUsers = async () => {
   return User.find({}, { password: 0 }).sort({ email: 1 });
 };
 
-// Récupère un utilisateur par son email
 exports.getUserByEmail = async (email) => {
   return User.findOne({ email });
 };
@@ -18,14 +14,12 @@ exports.addUser = async (data) => {
   return User.create(data); // ✅ Mongoose fera le hashage tout seul
 };
 
-
-// Met à jour un utilisateur par email
 exports.updateUser = async (email, data) => {
   const user = await User.findOne({ email });
   if (!user) throw new Error("Utilisateur introuvable");
 
   if (data.password) {
-  user.password = data.password; // ne pas re-hasher ici
+  user.password = data.password;
 }
 
   // Mise à jour uniquement des champs reçus
@@ -36,7 +30,6 @@ exports.updateUser = async (email, data) => {
   return user.save();
 };
 
-// Supprime un utilisateur par email
 exports.deleteUser = async (email) => {
   const result = await User.deleteOne({ email });
   if (result.deletedCount === 0) throw new Error("Utilisateur introuvable");

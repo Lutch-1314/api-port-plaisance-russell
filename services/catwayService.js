@@ -5,13 +5,10 @@ exports.getAllCatways = async () => {
 };
 
 
-// Nouvelle fonction pour récupérer un catway par son numéro
 exports.getCatwayByNumber = async (catwayNumber) => {
   return await Catway.findOne({ catwayNumber });
 };
 
-// ⚠️ Ajouter un catway
-// Ton code est bon, mais pour l’AJAX on veut renvoyer une erreur claire (objet Error)
 exports.addCatway = async ({ catwayNumber, catwayType, catwayState }) => {
   const exists = await Catway.findOne({ catwayNumber });
   if (exists) throw new Error("Ce numéro de catway est déjà utilisé.");

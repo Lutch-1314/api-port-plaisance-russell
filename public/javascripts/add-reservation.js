@@ -1,5 +1,3 @@
-// add-reservation.js — gestion uniquement de l'ajout d'une réservation
-
 import { setupDeleteButtons } from './delete-btn.js';
 import { setupEditableReservations } from './edit-reservation.js'; // on réactive les handlers après insertion
 
@@ -31,7 +29,6 @@ function getTargetTbodyForReservation(reservation) {
 // Insère la paire (newRow, editRow) triée par startDate dans le tbody
 function insertSortedRow(tbody, newRow, editRow, newReservation) {
   if (!tbody) {
-    // fallback
     document.querySelector('.editable-table.reservations tbody')?.appendChild(newRow);
     document.querySelector('.editable-table.reservations tbody')?.appendChild(editRow);
     return;
@@ -53,7 +50,6 @@ function insertSortedRow(tbody, newRow, editRow, newReservation) {
 
     if (newStart < rowDate) {
       tbody.insertBefore(newRow, row);
-      // insère editRow juste après newRow (row peut être décalé après insertion, donc on prend newRow.nextSibling)
       tbody.insertBefore(editRow, newRow.nextSibling);
       inserted = true;
       break;
@@ -71,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const addForm = document.querySelector('#addReservationForm');
   const cancelBtn = addForm.querySelector('.cancel-btn');
 
-  // afficher formulaire
   if (addBtn) {
     addBtn.addEventListener('click', () => {
       addForm.classList.remove('hidden');
@@ -79,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // annuler
   if (cancelBtn) {
     cancelBtn.addEventListener('click', () => {
       addForm.classList.add('hidden');
@@ -88,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // soumettre nouvel enregistrement
   addForm.addEventListener('submit', async e => {
     e.preventDefault();
     const formData = Object.fromEntries(new FormData(addForm));
@@ -108,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const newReservation = await response.json();
 
-      // === créer la ligne principale (affichage) ===
       const newRow = document.createElement('tr');
       newRow.classList.add('reservation-row');
       newRow.dataset.id = newReservation._id;
@@ -126,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
         </td>
       `;
 
-      // === créer la ligne d'édition JUSTE APRÈS (catway visible, formulaire commence au client) ===
       const editRow = document.createElement('tr');
       editRow.classList.add('edit-row', 'hidden');
       editRow.dataset.id = newReservation._id;
@@ -148,7 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const targetTbody = getTargetTbodyForReservation(newReservation) || document.querySelector('.editable-table.reservations tbody');
       insertSortedRow(targetTbody, newRow, editRow, newReservation);
 
-      // reset form + message
       addForm.reset();
       addForm.classList.add('hidden');
       if (addBtn) addBtn.classList.remove('hidden');

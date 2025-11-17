@@ -36,6 +36,7 @@ a {
 .editable-table caption {
   display: none;
 }
+
 td > .btn-container {
   display: flex;
   gap: 10px;

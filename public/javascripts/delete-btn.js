@@ -1,4 +1,3 @@
-// javascripts/delete-btn.js
 function showMessage(message, type = 'success') {
   const msgDiv = document.querySelector('.message');
   if (!msgDiv) return;
@@ -54,5 +53,4 @@ export function setupDeleteButtons(selector = '.delete-btn') {
   });
 }
 
-// Initialisation
 document.addEventListener('DOMContentLoaded', () => setupDeleteButtons());

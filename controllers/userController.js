@@ -61,7 +61,6 @@ exports.addUser = async (req, res) => {
   try {
     const user = await userService.addUser(req.body);
 
-    // Supprimer le mot de passe de la réponse
     const { password, ...userWithoutPassword } = user.toObject();
 
     res.status(201).json({
@@ -84,10 +83,8 @@ exports.updateUser = async (req, res) => {
       return res.status(404).json({ message: "Utilisateur introuvable" });
     }
 
-    // Supprimer le mot de passe de l'objet avant de renvoyer
     const { password, ...userWithoutPassword } = updatedUser.toObject();
-    
-    // Ne plus faire de redirection, renvoyer JSON
+
     res.status(200).json({
       username: updatedUser.username,
       email: updatedUser.email,

@@ -32,7 +32,7 @@ servers: [
   },
 ],
   },
-  apis: ['./routes/api/*.js'], // On cible toutes tes routes d’API
+  apis: ['./routes/api/*.js'],
 };
 
 const swaggerSpec = swaggerJsdoc(options);

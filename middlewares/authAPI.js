@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const SECRET_KEY = process.env.SECRET_KEY;
 
 function authApi(req, res, next) {
-  // Récupération du token dans l'en-tête Authorization : Bearer xxx
+  
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {

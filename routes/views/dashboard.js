@@ -6,7 +6,6 @@ const private = require('../../middlewares/checkJWT');
 router.get('/', private, async (req, res) => {
   try {
     const user = req.user;
-    console.log('user:', req.user); //test
 
     const reservations = await Reservation.find({
       startDate: { $lte: new Date() },

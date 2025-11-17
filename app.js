@@ -1,4 +1,3 @@
-const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -10,7 +9,7 @@ const indexRouter = require('./routes/index');
 
 const { swaggerUi, swaggerSpec } = require('./swagger');
 const app = express();
-require('dotenv').config();
+require('dotenv').config({ path: './env/.env' });
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log(`✅ Connecté à MongoDB : ${process.env.MONGO_URI}`))
@@ -35,14 +34,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/', indexRouter);
 
-// catch 404 and forward to error handler
 app.use((req, res, next) => {
   res.status(404).json({ message: 'Route non trouvée' });
 });
 
-// error handler
 app.use((err, req, res, next) => {
-  console.error(err.stack); // log serveur
+  console.error(err.stack);
   res.status(err.status || 500).json({
     message: err.message || 'Erreur interne du serveur',
     error: req.app.get('env') === 'development' ? err : {}

@@ -1,4 +1,3 @@
-// controllers/catwayController.js
 const catwayService = require('../services/catwayService');
 
 exports.getAllCatways = async (req, res) => {
