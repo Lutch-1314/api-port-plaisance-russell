@@ -38,7 +38,11 @@ export function setupDeleteButtons(selector = '.delete-btn') {
       if (!confirm(confirmMsg)) return;
 
       try {
-        const response = await fetch(url, { method: 'DELETE' });
+        const response = await fetch(url, { 
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include'  // <-- envoie automatiquement le cookie
+        });
         if (response.ok || response.status === 204) {
           row.remove();
           showMessage('Suppression réussie', 'success');
