@@ -10,27 +10,27 @@ const options = {
       description: 'Documentation Swagger de l’API du port de plaisance Russell',
     },
     components: {
-  securitySchemes: {
-    bearerAuth: {
-      type: 'http',
-      scheme: 'bearer',
-      bearerFormat: 'JWT',
-      description: 'Entrez votre token JWT ici (sans "Bearer ")'
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+          description: 'Entrez votre token JWT ici (sans "Bearer ")'
+        },
+      },
     },
-  },
-},
-security: [
-  {
-    bearerAuth: [],
-  },
-],
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
 
-servers: [
-  {
-    url: 'https://devoir-api-port-plaisance.onrender.com',
-    description: 'Serveur de production Render',
-  },
-],
+    servers: [
+      {
+        url: process.env.API_BASE_URL || "http://localhost:3000",
+        description: "Serveur API"
+      },
+    ],
   },
   apis: ['./routes/api/*.js'],
 };
