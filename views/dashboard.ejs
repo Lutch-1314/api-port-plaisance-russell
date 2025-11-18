@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Tableau de bord</title>
+        <link rel="stylesheet" href="/stylesheets/style.css">
     </head>
     <body>
         <header>
@@ -11,11 +12,11 @@
             <nav>
                 <ul>
                     <li><a href="/">🏠 Accueil</a></li>
-                    <li><a href="/catways">Gestion des catways</a></li>
-                    <li><a href="/reservations">Gestion des réservations</a></li>
-                    <li><a href="/users">Gestion des utilisateurs</a></li>
-                    <li><a href="/docs">Documentation API</a></li>
-                    <li><a href="/logout">Déconnexion</a></li>
+                    <li><a href="/catways">🛥️ Gestion des catways</a></li>
+                    <li><a href="/reservations">📅 Gestion des réservations</a></li>
+                    <li><a href="/users">👤 Gestion des utilisateurs</a></li>
+                    <li><a href="<%= process.env.API_BASE_URL %>/api-docs/#/" target="_blank">📄 Documentation de l'API</a></li>
+                    <li><a href="/logout">🔓 Déconnexion</a></li>
                 </ul>
             </nav>
         </header>
@@ -27,7 +28,7 @@
             </section>    
             <section>    
                 <h2>Liste des réservations en cours :</h2>
-                <table>
+                <table class="dashboard-table">
                     <thead>
                         <tr>
                             <th>Catway</th>

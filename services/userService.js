@@ -5,7 +5,7 @@ exports.getAllUsers = async () => {
 };
 
 exports.getUserByEmail = async (email) => {
-  return User.findOne({ email });
+  return User.findOne({ email }, { password: 0 });
 };
 
 // Ajoute un nouvel utilisateur avec mot de passe hashé automatiquement (via pre-save)
