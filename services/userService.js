@@ -8,6 +8,10 @@ exports.getUserByEmail = async (email) => {
   return User.findOne({ email }, { password: 0 });
 };
 
+exports.getUserWithPassword = async (email) => {
+  return User.findOne({ email }); // utilisé uniquement pour login
+};
+
 // Ajoute un nouvel utilisateur avec mot de passe hashé automatiquement (via pre-save)
 exports.addUser = async (data) => {
   if (!data.password) throw new Error("Le mot de passe est requis");

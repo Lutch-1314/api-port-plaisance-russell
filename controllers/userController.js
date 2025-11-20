@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 exports.login = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await userService.getUserByEmail(email);
+    const user = await userService.getUserWithPassword(email);
     if (!user) return res.status(404).json({ message: "Utilisateur non trouvé" });
 
     const match = await bcrypt.compare(password, user.password);

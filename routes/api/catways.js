@@ -5,10 +5,6 @@ const catwayController = require('../../controllers/catwayController');
 
 router.use(authApi);
 
-router.get('/test', async (req, res) => {
-  res.json({ message: "Route catways OK" });
-});
-
 /**
  * @swagger
  * tags:
@@ -76,6 +72,8 @@ router.get('/test', async (req, res) => {
  *   get:
  *     summary: Récupère tous les catways
  *     tags: [Catways]
+ *     security:
+ *      - bearerAuth: []
  *     responses:
  *       200:
  *         description: Liste de tous les catways
@@ -113,6 +111,8 @@ router.post('/', authApi, catwayController.addCatway);
  *   get:
  *     summary: Récupère un catway par son numéro
  *     tags: [Catways]
+ *     security:
+ *      - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -141,6 +141,8 @@ router.post('/', authApi, catwayController.addCatway);
  *       - "En cours de réparation"
  *       - "des taches de peinture"
  *     tags: [Catways]
+ *     security:
+ *      - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id

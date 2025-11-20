@@ -3,8 +3,6 @@ const router = express.Router();
 const authApi = require('../../middlewares/authAPI');
 const userController = require('../../controllers/userController');
 
-router.use(authApi);
-
 /**
  * @swagger
  * tags:
@@ -142,6 +140,9 @@ router.get('/logout', userController.logout);
  *       400:
  *         description: Données invalides ou email déjà utilisé
  */
+
+router.use(authApi);
+
 router.get('/', authApi, userController.getAllUsers);
 router.post('/', authApi, userController.addUser);
 

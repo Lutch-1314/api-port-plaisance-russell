@@ -2,8 +2,18 @@ const jwt = require("jsonwebtoken");
 const SECRET_KEY = process.env.SECRET_KEY;
 
 function authApi(req, res, next) {
-  const authHeader = req.headers.authorization;
-  const token = authHeader?.split(" ")[1] || req.cookies.token;
+  const isSwagger = req.headers["user-agent"]?.includes("Swagger");
+
+  let token;
+
+  if (isSwagger) {
+    // Swagger doit OBLIGATOIREMENT utiliser Authorization: Bearer
+    token = req.headers.authorization?.split(" ")[1];
+  } else {
+    // Le front peut utiliser cookie OU Bearer
+    const authHeader = req.headers.authorization;
+    token = authHeader?.split(" ")[1] || req.cookies.token;
+  }
 
   if (!token) return res.status(401).json({ message: "Token manquant" });
 
