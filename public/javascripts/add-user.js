@@ -7,6 +7,22 @@ function showMessage(message, type = 'success') {
   msgDiv.classList.remove('hidden');
 }
 
+// 🔥 Afficher / masquer mot de passe
+document.querySelectorAll('.toggle-password').forEach(icon => {
+  icon.addEventListener('click', () => {
+    const targetId = icon.dataset.target;
+    const input = document.getElementById(targetId);
+
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.textContent = '🙈';
+    } else {
+      input.type = 'password';
+      icon.textContent = '👁️';
+    }
+  });
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('addUserForm');
   const addBtn = document.querySelector('.add-btn');

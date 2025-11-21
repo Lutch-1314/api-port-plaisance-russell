@@ -1,8 +1,8 @@
 <form class="update-form hidden" data-email="<%= user.email %>">
   <input type="text" name="username" value="<%= user.username %>" required>
   <input type="email" name="email" value="<%= user.email %>" required>
-  <input type="password" name="password" placeholder="Nouveau mot de passe (optionnel)">
-  <input type="password" name="confirmPassword" id="confirm-password-<%= user._id %>" placeholder="Confirmer le mot de passe">
+  <input type="password" name="password" id= password-edit placeholder="Nouveau mot de passe (optionnel)">
+  <input type="password" name="confirmPassword" id="confirm-password-edit" placeholder="Confirmer le mot de passe">
   <button type="submit">Sauvegarder</button>
   <button type="button" class="cancel-btn">Annuler</button>
 </form>

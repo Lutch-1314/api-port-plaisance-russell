@@ -6,8 +6,16 @@
   <input type="email" name="email" id="email" required>
 
   <label for="password">Mot de passe :</label>
-  <input type="password" name="password" id="password" required>
-  <input type="password" name="confirmPassword" id="confirm-password" placeholder="Confirmer le mot de passe" required>
+  <div class="password-wrapper">
+    <input type="password" name="password" id="password" required>
+    <span class="toggle-password" data-target="password">👁️</span>
+  </div>
+
+  <label for="confirm-password">Confirmer le mot de passe :</label>
+  <div class="password-wrapper">
+    <input type="password" name="confirmPassword" id="confirm-password" required>
+    <span class="toggle-password" data-target="confirm-password">👁️</span>
+  </div>
   
   <div class="add-form-button">
     <button type="submit">Ajouter</button>
