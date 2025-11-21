@@ -7,6 +7,11 @@ function showMessage(message, type = 'success') {
   msgDiv.classList.remove('hidden');
 }
 
+function closeAllUserForms() {
+  document.querySelectorAll('.editable-table.users .update-form').forEach(f => f.classList.add('hidden'));
+  document.querySelectorAll('.editable-table.users .edit-btn').forEach(b => b.classList.remove('hidden'));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.editable-table.users tr').forEach(row => {
     const editBtn = row.querySelector('.edit-btn');
@@ -19,6 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const emailCell = row.children[1];
 
     editBtn.addEventListener('click', () => {
+
+      closeAllUserForms();
+      
       form.classList.remove('hidden');
       editBtn.classList.add('hidden');
     });

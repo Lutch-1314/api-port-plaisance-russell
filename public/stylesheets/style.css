@@ -24,10 +24,6 @@ a {
   padding: 10px;
 }
 
-.hidden {
-  display: none;
-}
-
 .message {
   padding: 12px 20px;
   width: fit-content;
@@ -81,4 +77,37 @@ td > .btn-container {
 
 .editable-table.reservations td:nth-child(3) {
   text-align: center;
+}
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+}
+
+select {
+  width:15%;
+  margin-bottom: 5px;
+}
+
+.add-form > input {
+  width: 10%;
+  margin-bottom: 5px;
+}
+
+.add-form> label {
+  margin: 15px 0 5px 0;
+}
+
+.add-form-button {
+  display: inline;
+  width: fit-content;
+  margin: 15px;
+}
+
+.text-warning {
+  color: red;
+}
+
+.hidden {
+  display: none;
 }

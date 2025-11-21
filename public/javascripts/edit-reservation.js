@@ -7,6 +7,12 @@ function showMessage(message, type = 'success') {
   msgDiv.style.display = 'block';
 }
 
+function closeAllReservationForms() {
+  document.querySelectorAll('.edit-row').forEach(r => r.classList.add('hidden'));
+  document.querySelectorAll('.reservation-row').forEach(r => r.style.display = '');
+  document.querySelectorAll('.delete-btn').forEach(b => b.classList.remove('hidden'));
+}
+
 // Trouve le tbody correct pour une réservation donnée
 function getTargetTbodyForReservation(reservation) {
   const today = new Date();
@@ -68,6 +74,9 @@ export function setupEditableReservations(tableSelector = '.editable-table.reser
 
     editBtn.addEventListener('click', e => {
       e.stopPropagation();
+
+      closeAllReservationForms();
+
       row.style.display = 'none';
       editRow.classList.remove('hidden');
       if (deleteBtn) deleteBtn.classList.add('hidden');

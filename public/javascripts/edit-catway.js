@@ -7,6 +7,12 @@ function showMessage(message, type = 'success') {
   msgDiv.classList.remove('hidden');
 }
 
+function closeAllCatwayForms() {
+  document.querySelectorAll('.update-form').forEach(f => f.classList.add('hidden'));
+  document.querySelectorAll('.state-text').forEach(t => t.classList.remove('hidden'));
+  document.querySelectorAll('.edit-btn').forEach(b => b.classList.remove('hidden'));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.editable-table.catways tr').forEach(row => {
     const editBtn = row.querySelector('.edit-btn');
@@ -17,6 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!editBtn || !form) return;
 
     editBtn.addEventListener('click', () => {
+
+      closeAllCatwayForms();
+      
       form.classList.remove('hidden');
       stateText.classList.add('hidden');
       editBtn.classList.add('hidden');

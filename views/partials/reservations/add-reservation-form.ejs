@@ -9,6 +9,10 @@
     <% }) %>
   </select>
 
+  <span class="text-warning">
+    Merci de vérifier si l'état du catway permet sa réservation
+  </span>
+
   <label for="clientName">Nom du client :</label>
   <input type="text" name="clientName" id="clientName" required>
 
@@ -21,6 +25,8 @@
   <label for="endDate">Date de fin :</label>
   <input type="date" name="endDate" id="endDate" required>
 
-  <button type="submit">Ajouter</button>
-  <button type="button" class="cancel-btn">Annuler</button>
+  <div class="add-form-button">
+    <button type="submit">Ajouter</button>
+    <button type="button" class="cancel-btn">Annuler</button>
+  </div>
 </form>
