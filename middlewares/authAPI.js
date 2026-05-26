@@ -19,7 +19,7 @@ function authApi(req, res, next) {
 
   try {
     const decoded = jwt.verify(token, SECRET_KEY);
-    req.user = { username: decoded.username, email: decoded.email };
+    req.user = { username: decoded.username, email: decoded.email, role: decoded.role };
     next();
   } catch (err) {
     console.error("JWT invalide :", err.message);

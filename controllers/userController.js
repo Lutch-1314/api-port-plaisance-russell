@@ -8,10 +8,17 @@ exports.login = async (req, res) => {
     const user = await userService.getUserWithPassword(email);
     if (!user) return res.status(404).json({ message: "Utilisateur non trouvé" });
 
-    const match = await bcrypt.compare(password, user.password);
+    console.log("Email reçu :", email);
+console.log("Utilisateur trouvé :", user?.email);
+console.log("Hash stocké :", user?.password);
+
+const match = await bcrypt.compare(password, user.password);
+
+console.log("Match :", match);
+
     if (!match) return res.status(403).json({ message: "Mot de passe incorrect" });
 
-    const payload = { username: user.username, email: user.email };
+    const payload = { username: user.username, email: user.email, role: user.role };
     const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '24h' });
 
     res.cookie('token', token, { httpOnly: true, maxAge: 24*60*60*1000 });

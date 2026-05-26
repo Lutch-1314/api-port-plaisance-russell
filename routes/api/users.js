@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const authApi = require('../../middlewares/authAPI');
+const adminOnly = require('../../middlewares/adminOnly');
 const userController = require('../../controllers/userController');
 
 /**
@@ -144,7 +145,7 @@ router.get('/logout', userController.logout);
 router.use(authApi);
 
 router.get('/', authApi, userController.getAllUsers);
-router.post('/', authApi, userController.addUser);
+router.post('/', authApi, adminOnly, userController.addUser);
 
 /**
  * @swagger
@@ -217,7 +218,7 @@ router.post('/', authApi, userController.addUser);
  *         description: Utilisateur non trouvé
  */
 router.get('/:email', authApi, userController.getUserByEmail);
-router.put('/:email', authApi, userController.updateUser);
-router.delete('/:email', authApi, userController.deleteUser);
+router.put('/:email', authApi, adminOnly, userController.updateUser);
+router.delete('/:email', authApi, adminOnly, userController.deleteUser);
 
 module.exports = router;

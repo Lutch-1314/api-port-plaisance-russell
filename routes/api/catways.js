@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const authApi = require('../../middlewares/authAPI');
+const adminOnly = require('../../middlewares/adminOnly');
 const catwayController = require('../../controllers/catwayController');
 
 router.use(authApi);
@@ -103,7 +104,7 @@ router.use(authApi);
  *               $ref: '#/components/schemas/Catway'
  */
 router.get('/', authApi, catwayController.getAllCatways);
-router.post('/', authApi, catwayController.addCatway);
+router.post('/', authApi, adminOnly, catwayController.addCatway);
 
 /**
  * @swagger
@@ -214,7 +215,8 @@ router.post('/', authApi, catwayController.addCatway);
  *                   example: "Catway non trouvé"
  */
 router.get('/:id', authApi, catwayController.getCatwayById);
-router.put('/:id', authApi, catwayController.updateCatway);
-router.delete('/:id', authApi, catwayController.deleteCatway);
+
+router.put('/:id', authApi, adminOnly, catwayController.updateCatway);
+router.delete('/:id', authApi, adminOnly, catwayController.deleteCatway);
 
 module.exports = router;

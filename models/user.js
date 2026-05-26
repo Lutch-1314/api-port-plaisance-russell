@@ -24,6 +24,11 @@ const UserSchema = new Schema ({
           /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/,
           'Le mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un caractère spécial.'
         ]
+    },
+    role: {
+        type: String,
+        enum: ['admin', 'viewer'],
+        default: 'viewer'
     }
 }, {
     timestamps: true

@@ -10,7 +10,8 @@ function checkJWT(req, res, next) {
 
     req.user = {
       username: decoded.username,
-      email: decoded.email
+      email: decoded.email,
+      role: decoded.role
     };
 
     next();
