@@ -34,7 +34,7 @@ const userController = require('../../controllers/userController');
  *           description: Adresse email unique de l'utilisateur
  *         password:
  *           type: string
- *           description: Mot de passe (minimum 8 caractères, avec au moins un chiffre)
+ *           description: Mot de passe (minimum 8 caractères, avec au moins un chiffre, une majuscule et un caractère spécial)
  *         createdAt:
  *           type: string
  *           format: date-time

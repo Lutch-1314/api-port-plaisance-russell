@@ -1,33 +1,34 @@
-const userService = require('../services/userService');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const userService = require("../services/userService");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await userService.getUserWithPassword(email);
-    if (!user) return res.status(404).json({ message: "Utilisateur non trouvé" });
+    if (!user)
+      return res.status(404).json({ message: "Utilisateur non trouvé" });
 
-    console.log("Email reçu :", email);
-console.log("Utilisateur trouvé :", user?.email);
-console.log("Hash stocké :", user?.password);
+    const match = await bcrypt.compare(password, user.password);
 
-const match = await bcrypt.compare(password, user.password);
+    if (!match)
+      return res.status(403).json({ message: "Mot de passe incorrect" });
 
-console.log("Match :", match);
+    const payload = {
+      username: user.username,
+      email: user.email,
+      role: user.role,
+    };
+    const token = jwt.sign(payload, process.env.SECRET_KEY, {
+      expiresIn: "24h",
+    });
 
-    if (!match) return res.status(403).json({ message: "Mot de passe incorrect" });
-
-    const payload = { username: user.username, email: user.email, role: user.role };
-    const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '24h' });
-
-    res.cookie('token', token, { httpOnly: true, maxAge: 24*60*60*1000 });
+    res.cookie("token", token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
     res.status(200).json({
       message: "Connexion réussie",
       token,
-      user: payload
+      user: payload,
     });
-
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Erreur serveur", error: err.message });
@@ -36,7 +37,7 @@ console.log("Match :", match);
 
 exports.logout = async (req, res) => {
   try {
-    res.clearCookie('token');
+    res.clearCookie("token");
     res.status(200).json({ message: "Déconnexion réussie" });
   } catch (err) {
     res.status(500).json({ message: "Erreur serveur", error: err.message });
@@ -49,14 +50,20 @@ exports.getAllUsers = async (req, res) => {
     res.status(200).json(users);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Impossible de charger les utilisateurs", error: err.message });
+    res
+      .status(500)
+      .json({
+        message: "Impossible de charger les utilisateurs",
+        error: err.message,
+      });
   }
 };
 
 exports.getUserByEmail = async (req, res) => {
   try {
     const user = await userService.getUserByEmail(req.params.email);
-    if (!user) return res.status(404).json({ message: "Utilisateur introuvable" });
+    if (!user)
+      return res.status(404).json({ message: "Utilisateur introuvable" });
     res.status(200).json(user);
   } catch (err) {
     console.error(err);
@@ -72,7 +79,7 @@ exports.addUser = async (req, res) => {
 
     res.status(201).json({
       message: "Utilisateur créé avec succès",
-      user: userWithoutPassword
+      user: userWithoutPassword,
     });
   } catch (err) {
     console.error(err);
@@ -96,11 +103,13 @@ exports.updateUser = async (req, res) => {
       username: updatedUser.username,
       email: updatedUser.email,
       message: "Utilisateur mis à jour avec succès",
-      user: userWithoutPassword
+      user: userWithoutPassword,
     });
   } catch (err) {
     console.error("🔥 Erreur modification utilisateur:", err);
-    res.status(400).json({ message: err.message || "Erreur modification utilisateur" });
+    res
+      .status(400)
+      .json({ message: err.message || "Erreur modification utilisateur" });
   }
 };
 
@@ -111,6 +120,8 @@ exports.deleteUser = async (req, res) => {
     res.status(204).send();
   } catch (err) {
     console.error(err);
-    res.status(400).json({ message: err.message || "Erreur lors de la suppression" });
+    res
+      .status(400)
+      .json({ message: err.message || "Erreur lors de la suppression" });
   }
 };
